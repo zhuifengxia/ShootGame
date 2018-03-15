@@ -1,5 +1,7 @@
 package momo.shoot;
 
+import java.util.Random;
+
 /**
  * 封装蜜蜂属性和功能的类
  * 
@@ -13,6 +15,24 @@ public class Bee extends Flyer {
 	private int xspeed = 1;// 水平移动的速度，每次移动一个单位长度；
 	private int yspeed = 2;// 垂直移动的速度；每次移动2个单位长度
 	private int awardType;// 当前蜜蜂保存的奖励类型
+
+	/**
+	 * 蜜蜂对象的无参构造方法
+	 */
+	public Bee() {
+		// 从主程序中获取蜜蜂图片的静态变量
+		image = ShootGame.bee;
+		// 用图片的尺寸设置对象的尺寸
+		width = image.getWidth();
+		height = image.getHeight();
+		// 设置蜜蜂对象开始下落的高度为-height
+		y = -height;
+		// 初始蜜蜂对象开始下落的x坐标，在0~（界面宽度-蜜蜂宽度）随机
+		Random r = new Random();
+		x = r.nextInt(ShootGame.WIDTH - width);
+		// 在0和1之间随机选取奖励类型
+		awardType = r.nextInt(2);
+	}
 
 	/**
 	 * 对外读取蜜蜂奖励类型的方法

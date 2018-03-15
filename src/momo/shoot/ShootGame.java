@@ -1,9 +1,11 @@
 package momo.shoot;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ShootGame extends JPanel {
@@ -40,9 +42,73 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	/**
+	 * 为游戏中的角色对象定义数据结构 ;
+	 * 
+	 */
+	public Hero hero = new Hero();// 英雄对象
+	public Flyer[] flyers = {};// 存储所有敌人的对象数组，敌机和蜜蜂
+	public Bullet[] bullets = {};// 存储子弹对象数组
 
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("飞机大战");// 创建jframe对象--窗框
+		frame.setSize(WIDTH, HEIGHT);// 设置窗体宽和高
+		frame.setAlwaysOnTop(true);// 设置窗体总在最上，不被其他窗体挡住
+		// 设置窗体关闭同时，退出程序
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);// 设置窗体的初始位置，null表示居中
+		// 在窗体中嵌入背景面板对象--jpanel
+		ShootGame game = new ShootGame();// 创建背景面板对象
+		frame.add(game);// 将背景面板对象嵌入到窗体对象中
+		// 窗体默认不可见，设置可见才能看到窗体
+		frame.setVisible(true);// 自动调用窗体的paint方法
 	}
 
+	@Override
+	public void paint(Graphics g) {
+		// 绘制背景图片0,0左上角绘制
+		g.drawImage(backcground, 0, 0, null);
+		// 绘制英雄机
+		paintHero(g);
+		// Airplane airplane = new Airplane();
+		// airplane.y += 100;
+		// Bee bee = new Bee();
+		// bee.y += 50;
+		// flyers = new Flyer[2];
+		// flyers[0] = airplane;
+		// flyers[1] = bee;
+		// 批量绘制敌人
+		paintFlyers(g);
+		// 批量绘制子弹
+		paintBullets(g);
+	}
+
+	/**
+	 * 绘制英雄机对象方法
+	 */
+	public void paintHero(Graphics g) {
+		g.drawImage(hero.image, hero.x, hero.y, null);
+	}
+
+	/**
+	 * 绘制所有敌人对象方法
+	 * 
+	 * @param g
+	 */
+	public void paintFlyers(Graphics g) {
+		for (int i = 0; i < flyers.length; i++) {
+			g.drawImage(flyers[i].image, flyers[i].x, flyers[i].y, null);
+		}
+	}
+
+	/**
+	 * 绘制所有子弹的方法
+	 * 
+	 * @param g
+	 */
+	public void paintBullets(Graphics g) {
+		for (int i = 0; i < bullets.length; i++) {
+			g.drawImage(bullets[i].image, bullets[i].x, bullets[i].y, null);
+		}
+	}
 }

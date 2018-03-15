@@ -12,6 +12,20 @@ public class Hero extends Flyer {
 	private int score; // 得分
 
 	/**
+	 * 英雄机构造方法
+	 */
+	public Hero() {
+		image = ShootGame.hero0;
+		width = image.getWidth();
+		height = image.getHeight();
+		x = 150;
+		y = 450;
+		doubleFire = 0;
+		life = 3;
+		score = 0;
+	}
+
+	/**
 	 * 对外提供读取生命值的方法
 	 * 
 	 * @return
