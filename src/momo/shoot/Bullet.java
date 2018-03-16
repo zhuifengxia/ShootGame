@@ -27,7 +27,8 @@ public class Bullet extends Flyer {
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
+		// 每次向上移动一个speed
+		y -= speed;
 
 	}
 

@@ -7,7 +7,7 @@ package momo.shoot;
  *
  */
 public class Hero extends Flyer {
-	private int doubleFire;// 双倍火力子弹数
+	private int doubleFire = 0;// 双倍火力子弹数
 	private int life; // 生命值
 	private int score; // 得分
 
@@ -84,6 +84,20 @@ public class Hero extends Flyer {
 	 */
 	public Bullet[] shoot() {
 		Bullet[] bullets = null;
+		// 判断合适创建双倍火力
+		if (doubleFire != 0) {
+			bullets = new Bullet[2];
+			Bullet b1 = new Bullet(x + width / 4, y - ShootGame.bullet.getHeight());
+			Bullet b2 = new Bullet(x + width * 3 / 4, y - ShootGame.bullet.getHeight());
+			bullets[0] = b1;
+			bullets[1] = b2;
+			// 每创建一次双倍火力
+			doubleFire -= 2;
+		} else {
+			// 单倍火力情况，
+			bullets = new Bullet[1];
+			bullets[0] = new Bullet(x + width / 2, y - ShootGame.bullet.getHeight());
+		}
 		return bullets;
 	}
 

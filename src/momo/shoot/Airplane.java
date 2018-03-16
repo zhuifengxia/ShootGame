@@ -35,7 +35,8 @@ public class Airplane extends Flyer {
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
+		// 每次向下移动向下移动1一个speed
+		y += speed;
 
 	}
 
