@@ -1,5 +1,7 @@
 package momo.shoot;
 
+import java.util.Random;
+
 /**
  * 封装英雄机属性和功能的类
  * 
@@ -7,7 +9,7 @@ package momo.shoot;
  *
  */
 public class Hero extends Flyer {
-	private int doubleFire = 0;// 双倍火力子弹数
+	private int doubleFire;// 双倍火力子弹数
 	private int life; // 生命值
 	private int score; // 得分
 
@@ -20,7 +22,7 @@ public class Hero extends Flyer {
 		height = image.getHeight();
 		x = 150;
 		y = 450;
-		doubleFire = 0;
+		doubleFire = 20;
 		life = 3;
 		score = 0;
 	}
@@ -44,9 +46,17 @@ public class Hero extends Flyer {
 	}
 
 	@Override
+	/**
+	 * 用来实现英雄机动画效果的方法，两种英雄机图片定时来回切换
+	 */
 	public void step() {
-		// TODO Auto-generated method stub
 
+		Random r = new Random();
+		if (r.nextInt(2) == 0) {
+			image = ShootGame.hero0;
+		} else {
+			image = ShootGame.hero1;
+		}
 	}
 
 	@Override
@@ -64,7 +74,9 @@ public class Hero extends Flyer {
 	 *            鼠标位置的y坐标
 	 */
 	public void move(int x, int y) {
-
+		// 传入的是鼠标的位置，该方法作用是将英雄机中心点和鼠标位置一致
+		this.x = x - width / 2;
+		this.y = y - height / 2;
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package momo.shoot;
 
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
@@ -73,6 +75,21 @@ public class ShootGame extends JPanel {
 	 * 游戏启动需要做的事情
 	 */
 	public void action() {
+		// 鼠标移动事件响应
+		MouseAdapter l = new MouseAdapter() {
+			// 重写鼠标移动事件
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// 移动就获得鼠标新位置
+				int x = e.getX();
+				int y = e.getY();
+				// 将新的坐标传给英雄机对象move方法
+				hero.move(x, y);
+			}
+		};// 匿名内部类
+
+		// 游戏开始监听鼠标事件添加，添加到程序的监听器中
+		this.addMouseMotionListener(l);
 		// 创建定时器对象
 		Timer timer = new Timer();
 		// 调用定时方法做计划
@@ -96,11 +113,14 @@ public class ShootGame extends JPanel {
 				// 每三百毫秒创建子弹
 				if (runTimes % 30 == 0) {
 					shoot();// 创建一次子弹
-					// 移动子弹位置
-					for (int i = 0; i < bullets.length; i++) {
-						bullets[i].step();
-					}
 				}
+				// 移动子弹位置
+				for (int i = 0; i < bullets.length; i++) {
+					bullets[i].step();
+				}
+
+				// 添加英雄机动画效果
+				hero.step();
 				// 界面发生改变必须使用repaint重绘界面
 				repaint();
 
