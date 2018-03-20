@@ -246,10 +246,10 @@ public class ShootGame extends JPanel {
 	public void nextOne() {
 		Random r = new Random();
 		Flyer f = null;
-		if (r.nextInt(10) == 0) {// 设置蜜蜂生成概率
+		if (r.nextInt(50) == 0) {// 设置蜜蜂生成概率
 			f = new Bee();
 		} else {
-			if (r.nextInt(40) == 0) {// 设置大型敌机生成概率
+			if (r.nextInt(10) == 0) {// 设置大型敌机生成概率
 				f = new BigPlane();
 			} else {
 				f = new Airplane();
