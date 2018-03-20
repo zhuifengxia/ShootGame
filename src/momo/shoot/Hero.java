@@ -8,7 +8,7 @@ import java.util.Random;
  * @author liudanfeng
  *
  */
-public class Hero extends Flyer {
+public class Hero extends Flyer implements EnemyScore {
 	private int doubleFire;// 双倍火力子弹数
 	private int life; // 生命值
 	private int score; // 得分
@@ -34,15 +34,6 @@ public class Hero extends Flyer {
 	 */
 	public int getLife() {
 		return life;
-	}
-
-	/**
-	 * 对外提供获取得分的方法
-	 * 
-	 * @return
-	 */
-	public int getScore() {
-		return score;
 	}
 
 	@Override
@@ -90,8 +81,11 @@ public class Hero extends Flyer {
 		if (f instanceof Airplane) {// 对象是敌机类型
 			// 将敌人保存的分值加到当前英雄机分值属性中
 			score += ((Airplane) f).getScore();
+		} else if (f instanceof BigPlane) {// 大型敌机
+			// 将敌人保存的分值加到当前英雄机分值属性中
+			score += ((BigPlane) f).getScore();
 		} else {// 敌人对象是蜜蜂类型
-			// 判断蜜蜂类型对象中保存的奖励类型
+				// 判断蜜蜂类型对象中保存的奖励类型
 			if (((Bee) f).getAwardType() == Bee.DOUBLE_FIRE) {
 				// 说明是双倍火力
 				doubleFire += 40;
@@ -141,5 +135,13 @@ public class Hero extends Flyer {
 			doubleFire = 0;// 双倍火力清零
 		}
 		return r;
+	}
+
+	/**
+	 * 外部获取得分
+	 */
+	@Override
+	public int getScore() {
+		return score;
 	}
 }

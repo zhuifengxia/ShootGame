@@ -3,20 +3,21 @@ package momo.shoot;
 import java.util.Random;
 
 /**
- * 封装敌机属性和功能的类
+ * 大型敌机的相关封装
  * 
  * @author liudanfeng
  *
  */
-public class Airplane extends Flyer implements EnemyScore {
-	private int speed = 2;// 敌机每次下落2个单位长度
-	private int score = 5;// 敌机包含的奖励分数
+public class BigPlane extends Flyer implements EnemyScore {
+
+	private int speed = 1;// 敌机每次下落1个单位长度
+	private int score = 50;// 敌机包含的奖励分数
 
 	/**
-	 * 敌机类的无参构造方法
+	 * 大型敌机类的无参构造方法
 	 */
-	public Airplane() {
-		image = ShootGame.airplane;
+	public BigPlane() {
+		image = ShootGame.bigplane;
 		width = image.getWidth();
 		height = image.getHeight();
 		y = -height;
@@ -26,9 +27,7 @@ public class Airplane extends Flyer implements EnemyScore {
 
 	@Override
 	public void step() {
-		// 每次向下移动向下移动1一个speed
 		y += speed;
-
 	}
 
 	@Override
@@ -44,4 +43,5 @@ public class Airplane extends Flyer implements EnemyScore {
 	public int getScore() {
 		return score;
 	}
+
 }

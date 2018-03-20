@@ -33,6 +33,7 @@ public class ShootGame extends JPanel {
 	public static BufferedImage hero1;// 英雄机图片1
 	public static BufferedImage pause;// 暂停图片
 	public static BufferedImage gameover;// 结束图片
+	public static BufferedImage bigplane;// 大型敌机图片
 	static {// 静态块，仅在类首次加载到方法区时执行一次，专门加载静态资源
 		try {
 			backcground = ImageIO.read(ShootGame.class.getResource("background.png"));
@@ -44,6 +45,7 @@ public class ShootGame extends JPanel {
 			pause = ImageIO.read(ShootGame.class.getResource("pause.png"));
 			gameover = ImageIO.read(ShootGame.class.getResource("gameover.png"));
 			start = ImageIO.read(ShootGame.class.getResource("start.png"));
+			bigplane = ImageIO.read(ShootGame.class.getResource("bigplane.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -244,10 +246,14 @@ public class ShootGame extends JPanel {
 	public void nextOne() {
 		Random r = new Random();
 		Flyer f = null;
-		if (r.nextInt(20) == 0) {// 设置蜜蜂生成概率
+		if (r.nextInt(10) == 0) {// 设置蜜蜂生成概率
 			f = new Bee();
 		} else {
-			f = new Airplane();
+			if (r.nextInt(40) == 0) {// 设置大型敌机生成概率
+				f = new BigPlane();
+			} else {
+				f = new Airplane();
+			}
 		}
 
 		flyers = Arrays.copyOf(flyers, flyers.length + 1);
