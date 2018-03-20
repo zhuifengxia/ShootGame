@@ -34,7 +34,7 @@ public class Bullet extends Flyer {
 
 	@Override
 	public boolean outOfBounds() {
-		// TODO Auto-generated method stub
-		return false;
+		// 子弹y坐标+子弹高度<0说明越界
+		return y + height < 0;
 	}
 }

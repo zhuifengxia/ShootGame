@@ -57,7 +57,7 @@ public class Bee extends Flyer {
 
 	@Override
 	public boolean outOfBounds() {
-		// TODO Auto-generated method stub
-		return false;
+		// 蜜蜂y坐标>游戏界面高度就算越界
+		return y > ShootGame.HEIGHT;
 	}
 }

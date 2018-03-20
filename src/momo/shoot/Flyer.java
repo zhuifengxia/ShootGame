@@ -26,4 +26,28 @@ public abstract class Flyer {
 	 * @return 是否越界
 	 */
 	public abstract boolean outOfBounds();
+
+	/**
+	 * 检测两个矩形飞行物是否碰撞的工具方法 因为和具体对象无关，所以定义静态方法
+	 * 
+	 * @param f1
+	 *            飞行物对象1
+	 * @param f2
+	 *            飞行物对象2
+	 * @return
+	 */
+	public static boolean bang(Flyer f1, Flyer f2) {
+		// 求出两个矩形的中心点
+		int f1x = f1.x + f1.width / 2;
+		int f1y = f1.y + f1.height / 2;
+		int f2x = f2.x + f2.width / 2;
+		int f2y = f2.y + f2.height / 2;
+		// 横向和纵向碰撞检测
+		boolean H = Math.abs(f1x - f2x) < (f1.width + f2.width) / 2;
+		boolean V = Math.abs(f1y - f2y) < (f1.height + f2.height) / 2;
+		// 必须两个方向都碰撞才算真正碰撞上了
+
+		return H & V;
+
+	}
 }

@@ -22,7 +22,7 @@ public class Hero extends Flyer {
 		height = image.getHeight();
 		x = 150;
 		y = 450;
-		doubleFire = 20;
+		doubleFire = 0;
 		life = 3;
 		score = 0;
 	}
@@ -86,7 +86,20 @@ public class Hero extends Flyer {
 	 *            父类型的变量，既可以指向敌机类型也可以指向蜜蜂类型
 	 */
 	public void getScore_Award(Flyer f) {
-
+		// 判断敌机类型
+		if (f instanceof Airplane) {// 对象是敌机类型
+			// 将敌人保存的分值加到当前英雄机分值属性中
+			score += ((Airplane) f).getScore();
+		} else {// 敌人对象是蜜蜂类型
+			// 判断蜜蜂类型对象中保存的奖励类型
+			if (((Bee) f).getAwardType() == Bee.DOUBLE_FIRE) {
+				// 说明是双倍火力
+				doubleFire += 40;
+			} else {
+				// 奖励类型是一个生命
+				life += 1;
+			}
+		}
 	}
 
 	/**
@@ -121,6 +134,12 @@ public class Hero extends Flyer {
 	 * @return false为碰撞；true碰撞
 	 */
 	public boolean hit(Flyer f) {
-		return false;
+		// 调用碰撞检测工具方法，检测英雄机和敌机是否碰撞
+		boolean r = Flyer.bang(this, f);
+		if (r) {// 碰撞
+			life--;// 生命值减一
+			doubleFire = 0;// 双倍火力清零
+		}
+		return r;
 	}
 }

@@ -42,7 +42,7 @@ public class Airplane extends Flyer {
 
 	@Override
 	public boolean outOfBounds() {
-		// TODO Auto-generated method stub
-		return false;
+		// 敌机y坐标>游戏界面高度就算越界
+		return y > ShootGame.HEIGHT;
 	}
 }
